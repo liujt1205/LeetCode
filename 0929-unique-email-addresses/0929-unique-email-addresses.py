@@ -13,12 +13,6 @@ class Solution:
         return res
     
     def clean(self, ln):
-        res = ''
-        for c in ln:
-            if c == '.':
-                continue
-            elif c == '+':
-                break
-            else:
-                res += c
+        res = ln.split('+')[0]
+        res = ''.join(res.split('.'))
         return res
