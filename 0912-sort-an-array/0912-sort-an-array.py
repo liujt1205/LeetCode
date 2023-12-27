@@ -13,11 +13,10 @@ class Solution:
                 if temp[left + i] <= temp[mid + 1 + j]:
                     nums[k] = temp[left + i]
                     i += 1
-                    k += 1
                 else:
                     nums[k] = temp[mid + 1 + j]
                     j += 1
-                    k += 1
+                k += 1
             while i < l1:
                 nums[k] = temp[left + i]
                 i += 1
