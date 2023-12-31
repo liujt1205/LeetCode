@@ -11,6 +11,6 @@ class Solution:
                 end[index] = i
         res = -1
         for i in range(26):
-            if end[i] != -1:
-                res = max(res, end[i] - start[i] - 1)
+            if end[i] != -1 and (end[i] - start[i] - 1) > res:
+                res = end[i] - start[i] - 1
         return res
