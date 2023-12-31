@@ -7,8 +7,8 @@ class Solution:
             index = ord(s[i]) - ord('a')
             if start[index] == n:
                 start[index] = i
-            else:
-                end[index] = max(end[index], i)
+            elif i > end[index]:
+                end[index] = i
         res = -1
         for i in range(26):
             if end[i] != -1:
