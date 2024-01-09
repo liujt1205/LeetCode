@@ -7,27 +7,17 @@
 class Solution:
     def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
         sq1 = deque()
-        def dfs(root: Optional[TreeNode]):
+        sq2 = deque()
+        def dfs(root: Optional[TreeNode], storage: deque):
             if root is None:
                 return
             if root.left is None and root.right is None:
-                sq1.append(root.val)
+                storage.append(root.val)
             else:
-                dfs(root.left)
-                dfs(root.right)
-        dfs(root1)
-        stack = []
-        stack.append(root2)
-        while len(stack) != 0:
-            curNode = stack.pop()
-            if curNode is None:
-                continue
-            if curNode.left is None and curNode.right is None:
-                if not sq1 or curNode.val != sq1.popleft():
-                    return False
-            else:
-                stack.append(curNode.right)
-                stack.append(curNode.left)
-        return not sq1
+                dfs(root.left, storage)
+                dfs(root.right, storage)
+        dfs(root1, sq1)
+        dfs(root2, sq2)
+        return sq1 == sq2
                 
             
