@@ -3,10 +3,10 @@ class Solution:
         res = 0
         sCount = Counter(s)
         tCount = Counter(t)
-        for char, count in sCount.items():
-            target = tCount.get(char, 0)
-            res += abs(target - count)
-        for char, count in tCount.items():
-            if char not in sCount:
-                res += count
-        return res // 2
+        for i in range(26):
+            curChar = chr(ord('a') + i)
+            count1 = sCount.get(curChar, 0)
+            count2 = tCount.get(curChar, 0)
+            if count1 > count2:
+                res += count1 - count2
+        return res
