@@ -1,7 +1,11 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        memo = [0] * (len(nums) + 1)
-        memo[1] = nums[0]
-        for i in range(2, len(nums) + 1):
-            memo[i] = max(memo[i - 1], memo[i - 2] + nums[i - 1])
-        return memo[-1]
+        if not nums:
+            return 0
+        pre = 0
+        pre2 = 0
+        for i in range(len(nums)):
+            cur = max(pre, nums[i] + pre2)
+            pre2 = pre
+            pre = cur
+        return pre
