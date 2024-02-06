@@ -20,6 +20,7 @@ class Solution:
                     for station in routes[bus]:
                         if station not in visited:
                             buses.extend(memo.get(station, []))
+                            visited.add(station)
                         if station == target:
                             return res
                     seen.add(bus)
