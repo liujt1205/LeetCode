@@ -3,8 +3,8 @@ class Solution:
         memo = {}
         for i in range(len(routes)):
             for j in routes[i]:
-                memo[j] = memo.get(j, [])
-                memo[j].append(i)
+                memo[j] = memo.get(j, set())
+                memo[j].add(i)
         if source == target:
             return 0
         visited = set()
