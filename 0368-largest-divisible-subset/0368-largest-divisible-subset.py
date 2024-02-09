@@ -11,10 +11,8 @@ class Solution:
                     cur = memo[j][:]
                     cur.append(nums[i])
                     memo[i] = cur
-        maxLength = -1
-        bigIndex = 0
+        res = []
         for i in range(len(nums)):
-            if len(memo[i]) > maxLength:
-                bigIndex = i
-                maxLength = len(memo[i])
-        return memo[bigIndex]
+            if len(memo[i]) > len(res):
+                res = memo[i]
+        return res
