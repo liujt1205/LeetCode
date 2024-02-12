@@ -1,10 +1,7 @@
 class Solution:
     def compress(self, chars: List[str]) -> int:
-        if not chars:
-            return 0
         count = 0
         res = 1
-        cur = 0
         for i in range(len(chars)):
             if chars[i] == chars[res - 1]:
                 count += 1       
