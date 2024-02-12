@@ -5,8 +5,8 @@ class Solution:
         n = len(mat2[0])
         res = [[0] * n for _ in range(m)]
         for i in range(m):
-            for j in range(n):
-                for h in range(k):
-                    if mat1[i][h] != 0 and mat2[h][j] != 0:
+            for h in range(k):
+                if mat1[i][h] != 0:
+                    for j in range(n):
                         res[i][j] += mat1[i][h] * mat2[h][j]
         return res
