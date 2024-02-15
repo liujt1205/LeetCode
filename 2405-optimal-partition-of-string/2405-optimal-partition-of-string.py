@@ -10,8 +10,7 @@ class Solution:
             if len(seen) < length:
                 res += 1
                 seen.clear()
+                seen.add(s[start + length - 1])
                 start = start + length - 1
                 length = 1
-                seen.add(s[start + length - 1])
-
         return res + 1
