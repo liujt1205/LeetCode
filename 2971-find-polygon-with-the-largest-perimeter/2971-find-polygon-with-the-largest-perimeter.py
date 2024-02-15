@@ -4,7 +4,7 @@ class Solution:
         preSum = 0
         res = -1
         for num in nums:
-            if preSum and preSum > num:
+            if preSum > num:
                 res = max(res, preSum + num)
             preSum += num
         return res
