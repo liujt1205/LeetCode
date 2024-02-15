@@ -1,16 +1,11 @@
 class Solution:
     def partitionString(self, s: str) -> int:
-        start = 0
-        length = 0
-        seen = set()
+        seen = [0] * 26
         res = 0
-        while start + length < len(s):
-            seen.add(s[start + length])
-            length += 1
-            if len(seen) < length:
+        for char in s:
+            seen[ord(char) - ord('a')] += 1
+            if seen[ord(char) - ord('a')] > 1:
                 res += 1
-                seen.clear()
-                seen.add(s[start + length - 1])
-                start = start + length - 1
-                length = 1
+                seen = [0] * 26
+                seen[ord(char) - ord('a')] += 1
         return res + 1
