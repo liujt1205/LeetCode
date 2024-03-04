@@ -12,11 +12,10 @@ class Solution:
                 score += 1
                 res = max(res, score)
                 left += 1
+            elif score > 0:
+                power += tokens[right]
+                score -= 1
+                right -= 1
             else:
-                if score > 0:
-                    power += tokens[right]
-                    score -= 1
-                    right -= 1
-                else:
-                    break
+                break
         return res
