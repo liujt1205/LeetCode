@@ -1,12 +1,14 @@
 class Solution:
     def maxFrequencyElements(self, nums: List[int]) -> int:
         maxCount = 0
-        freqGroup = defaultdict(list)
+        res = 0
         freq = defaultdict(int)
         for num in nums:
             curFreq = freq[num]
             freq[num] += 1
-            freqGroup[curFreq + 1].append(num)
             if curFreq + 1 > maxCount:
                 maxCount = curFreq + 1
-        return maxCount * len(freqGroup[maxCount])
+                res = maxCount
+            elif curFreq + 1 == maxCount:
+                res += maxCount
+        return res
