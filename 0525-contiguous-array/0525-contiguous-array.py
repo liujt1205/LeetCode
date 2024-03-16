@@ -8,10 +8,10 @@ class Solution:
                 count -= 1
             else:
                 count += 1
-            if counts.get(count, -1) < 0:
-                counts[count] = i
             if count == 0:
                 res = max(res, i + 1)
             elif counts.get(count, -1) >= 0:
                 res = max(res, i - counts[count])
+            else:
+                counts[count] = i
         return res
