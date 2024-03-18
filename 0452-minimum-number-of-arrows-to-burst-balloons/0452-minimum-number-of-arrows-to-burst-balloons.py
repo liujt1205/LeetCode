@@ -4,8 +4,7 @@ class Solution:
         curStop = -float('inf')
         res = 0
         points.sort()
-        for i in range(len(points)):
-            start, stop = points[i]
+        for start, stop in points:
             if start > curStop:
                 res += 1
                 curStart = start
