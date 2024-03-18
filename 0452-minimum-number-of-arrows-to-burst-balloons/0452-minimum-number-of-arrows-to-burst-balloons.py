@@ -10,6 +10,6 @@ class Solution:
                 curStart = start
                 curStop = stop
             else:
-                curStart = max(curStart, start)
+                curStart = start
                 curStop = min(curStop, stop)
         return res
