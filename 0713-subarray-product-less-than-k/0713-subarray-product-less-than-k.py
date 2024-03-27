@@ -1,25 +1,14 @@
 class Solution:
     def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
-        products = [1] * (len(nums) + 1)
-        cur = 1
+        if k <= 1:
+            return 0
         res = 0
-        for i in range(len(nums)):
-            cur *= nums[i]
-            products[i + 1] *= cur
-        
-        def find(products, limit, i):
-            start = i + 1
-            end = len(products) - 1
-            while start <= end:
-                mid = start + (end - start) // 2
-                if products[mid] <= limit:
-                    start = mid + 1
-                else:
-                    end = mid - 1
-            return start - 1
-        
-        for i in range(len(nums)):
-            limit = products[i] * (k - 1)
-            res += find(products, limit, i) - i
-            
+        cur = 1
+        start = 0
+        for i, num in enumerate(nums):
+            cur *= num
+            while cur >= k:
+                cur /= nums[start]
+                start += 1
+            res += i - start + 1
         return res
