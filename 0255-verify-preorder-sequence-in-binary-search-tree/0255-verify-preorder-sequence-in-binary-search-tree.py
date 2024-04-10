@@ -1,17 +1,14 @@
 class Solution:
     def verifyPreorder(self, preorder: List[int]) -> bool:
-        index = 0
-        
-        def helper(left, right):
-            nonlocal index
-            if index == len(preorder):
-                return True
-            cur = preorder[index]
-            if cur >= right or cur <= left:
+        i = 0
+        min_limit = -inf
+        for num in preorder:
+            while i > 0 and preorder[i - 1] < num:
+                min_limit = preorder[i - 1]
+                i -= 1
+            if num <= min_limit:
                 return False
-            index += 1
-            leftSide = helper(left, cur) 
-            rightSide = helper(cur, right)
-            return leftSide or rightSide
+            preorder[i] = num
+            i += 1
             
-        return helper(-float('inf'), float('inf'))
+        return True
