@@ -15,12 +15,11 @@ class Solution:
             if not cur.left and not cur.right:
                 if not res:
                     res = newPrefix
-                elif res > newPrefix:
-                    res = newPrefix
-            else:
-                if cur.left:
-                    queue.append((cur.left, newPrefix))
-                if cur.right:
-                    queue.append((cur.right, newPrefix))
+                else:
+                    res = min(res, newPrefix)
+            if cur.left:
+                queue.append((cur.left, newPrefix))
+            if cur.right:
+                queue.append((cur.right, newPrefix))
         return res
         
