@@ -6,11 +6,9 @@ class Solution:
             nonlocal res
             nonlocal grid
             nonlocal visited
-            if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
+            if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]) or grid[row][col] == 0:
                 res += 1
                 return
-            if grid[row][col] == 0:
-                res += 1
             elif visited[row][col]:
                 return
             else:
