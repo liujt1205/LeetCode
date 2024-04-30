@@ -4,6 +4,5 @@ class Solution:
         res = 0
         for num in nums:
             prefix += num
-            res |= num 
-            res |= prefix
+            res |= num | prefix
         return res
