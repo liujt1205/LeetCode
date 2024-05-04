@@ -6,10 +6,8 @@ class Solution:
         right = n - 1
         res = 0
         while left <= right:
-            if people[left] + people[right] > limit:
-                right -= 1
-            else:
+            if people[left] + people[right] <= limit:
                 left += 1
-                right -= 1
+            right -= 1
             res += 1
         return res
