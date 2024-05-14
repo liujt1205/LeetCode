@@ -13,8 +13,11 @@ class Solution:
                 expand(grid, row, col-1, count+cur)
                 grid[row][col] = cur
         
+        total = sum(sum(row) for row in grid)
         res = 0
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 expand(grid, i, j, 0)
+                if res == total:
+                    return total
         return res
