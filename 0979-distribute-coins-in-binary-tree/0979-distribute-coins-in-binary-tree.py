@@ -11,8 +11,10 @@ class Solution:
             if node is None:
                 return 0
             nonlocal res
-            res += abs(balanceNode(node.left)) + abs(balanceNode(node.right))
-            return node.val + balanceNode(node.left) + balanceNode(node.right) - 1
+            left = balanceNode(node.left)
+            right = balanceNode(node.right)
+            res += abs(left) + abs(right)
+            return node.val + left + right - 1
         
         balanceNode(root)
         return res
