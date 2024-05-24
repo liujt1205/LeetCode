@@ -16,10 +16,17 @@ class Solution:
         res = 0
         for mask in range(1 << n):
             letterCount = [0] * 26
+            valid = True
             for i in range(n):
                 if mask & (1 << i):
                     for char in words[i]:
-                        letterCount[ord(char) - ord('a')] += 1
-            res = max(res, calSet(letterCount, count, score))
+                        index = ord(char) - ord('a')
+                        letterCount[index] += 1
+                        if letterCount[index] > count[index]:
+                            valid = False
+                if not valid:
+                    break
+            if valid:
+                res = max(res, calSet(letterCount, count, score))
             
         return res
