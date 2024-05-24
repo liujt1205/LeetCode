@@ -14,7 +14,7 @@ class Solution:
             return res
         
         res = 0
-        for mask in range((1 << n) - 1, -1, -1):
+        for mask in range(1 << n):
             letterCount = [0] * 26
             valid = True
             for i in range(n):
