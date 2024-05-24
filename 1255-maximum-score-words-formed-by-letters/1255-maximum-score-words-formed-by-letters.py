@@ -1,30 +1,25 @@
 class Solution:
     def maxScoreWords(self, words: List[str], letters: List[str], score: List[int]) -> int:
+        n = len(words)
         count = [0] * 26
         for letter in letters:
             count[ord(letter) - ord('a')] += 1
-        def calSet(wordSet, count, score):
+            
+        def calSet(letterCount, count, score):
             res = 0
-            tempCount = [0] * 26
-            for word in wordSet:
-                for char in word:
-                    index = ord(char) - ord('a')
-                    tempCount[index] += 1
-                    res += score[index]
             for i in range(26):
-                if tempCount[i] > count[i]:
+                if letterCount[i] > count[i]:
                     return 0
+                res += letterCount[i] * score[i]
             return res
         
-        wordSet = [[]]
         res = 0
-        for word in words:
-            tempList = []
-            for i in range(len(wordSet)):
-                temp = wordSet[i][:]
-                temp.append(word)
-                tempList.append(temp)
-            wordSet.extend(tempList)
-        for words in wordSet:
-            res = max(res, calSet(words, count, score))
+        for mask in range(1 << n):
+            letterCount = [0] * 26
+            for i in range(n):
+                if mask & (1 << i):
+                    for char in words[i]:
+                        letterCount[ord(char) - ord('a')] += 1
+            res = max(res, calSet(letterCount, count, score))
+            
         return res
