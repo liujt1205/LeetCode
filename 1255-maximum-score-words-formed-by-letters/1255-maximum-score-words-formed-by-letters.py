@@ -24,6 +24,7 @@ class Solution:
                         letterCount[index] += 1
                         if letterCount[index] > count[index]:
                             valid = False
+                            break
                 if not valid:
                     break
             if valid:
