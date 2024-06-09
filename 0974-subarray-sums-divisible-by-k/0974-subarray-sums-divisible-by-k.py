@@ -5,7 +5,7 @@ class Solution:
         curSum = 0
         res = 0
         for num in nums:
-            curSum = (curSum + num) % k
+            curSum = (curSum + num % k + k) % k
             res += prefix[curSum]
             prefix[curSum] += 1
         return res
