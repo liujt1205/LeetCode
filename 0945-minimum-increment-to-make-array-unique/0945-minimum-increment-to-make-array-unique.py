@@ -1,7 +1,7 @@
 class Solution:
     def minIncrementForUnique(self, nums: List[int]) -> int:
-        count = defaultdict(int)
         small, large = min(nums), max(nums)
+        count = [0] * (large + 2)
         res = 0
         cur = small
         for num in nums:
