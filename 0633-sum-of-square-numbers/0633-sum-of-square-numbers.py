@@ -1,9 +1,6 @@
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:
-        squares = set()
         for i in range(int(sqrt(c)) + 1):
-            squares.add(i * i)
-        for square in squares:
-            if c - square in squares:
+            if sqrt(c - i * i) == int(sqrt(c - i * i)):
                 return True
         return False
