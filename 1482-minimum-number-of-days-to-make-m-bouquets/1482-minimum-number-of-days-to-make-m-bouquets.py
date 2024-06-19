@@ -18,7 +18,7 @@ class Solution:
                     count = 0
             return False
         
-        start, end = min(bloomDay), max(bloomDay)
+        start, end = 0, max(bloomDay)
         while start < end:
             mid = start + (end - start) // 2
             if check(mid, bloomDay, m, k):
