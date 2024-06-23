@@ -13,10 +13,8 @@ class Solution:
             small.append((nums[i], i))
             while large[0][0] - small[0][0] > limit:
                 if large[0][1] < small[0][1]:
-                    pre = large.popleft()
-                    start = pre[1]
+                    start = large.popleft()[1]
                 else:
-                    pre = small.popleft()
-                    start = pre[1]
+                    start = small.popleft()[1]
             res = max(res, i - start)
         return res
