@@ -6,7 +6,7 @@ class Solution:
             freq[b] += 1
         freq.sort()
         res = 0
-        for num in range(n - 1, -1, -1):
+        for num in range(n):
             res += (num + 1) * freq[num]
         
         return res
