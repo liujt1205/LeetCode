@@ -23,8 +23,7 @@ class Solution:
                 else:
                     count[1] += 1
             else:
-                if count[0] * count[1] > 0:
-                    res += smaller * min(count[0], count[1])
+                res += smaller * min(count[0], count[1])
                 count = [0] * 2
         
         res += smaller * min(count[0], count[1])
