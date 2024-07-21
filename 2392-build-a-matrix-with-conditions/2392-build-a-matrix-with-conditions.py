@@ -1,7 +1,5 @@
 class Solution:
     def buildMatrix(self, k: int, rowConditions: List[List[int]], colConditions: List[List[int]]) -> List[List[int]]:
-        rowOrder = defaultdict(list)
-        colOrder = defaultdict(list)
         
         def getOrder(conditions, orderDict, k):
             indegree = [0] * (k + 1)
@@ -24,12 +22,11 @@ class Solution:
                         queue.append(below)
             return pos == k
         
+        rowOrder, colOrder = defaultdict(list), defaultdict(list)
         if getOrder(rowConditions, rowOrder, k) and getOrder(colConditions, colOrder, k):
             res = [[0] * k for _ in range(k)]
             for i in range(1, k + 1):
-                rowIndex = rowOrder[i]
-                colIndex = colOrder[i]
-                res[rowIndex][colIndex] = i
+                res[rowOrder[i]][colOrder[i]] = i
             return res
         else:
             print(list(rowOrder))
