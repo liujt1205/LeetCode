@@ -16,7 +16,8 @@ class Solution:
             else:
                 memo[dest][count] = dist
             for neighbor, toll in graph[dest]:
-                heapq.heappush(pq, (dist + toll, neighbor, count))
-                if count < discounts:
-                    heapq.heappush(pq, (dist + toll // 2, neighbor, count + 1))
+                if memo[neighbor][count] == -1:
+                    heapq.heappush(pq, (dist + toll, neighbor, count))
+                    if count < discounts and memo[neighbor][count + 1] == -1:
+                        heapq.heappush(pq, (dist + toll // 2, neighbor, count + 1))
         return -1
