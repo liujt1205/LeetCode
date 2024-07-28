@@ -11,7 +11,6 @@ class Solution:
         visited[1][0] = 0
         while queue:
             vertex, arriveTime = queue.popleft()
-            print(vertex, arriveTime, visited[n])
             if vertex == n and visited[n][1] != -1:
                 return visited[n][1]
             if (arriveTime // change) % 2 != 0:
