@@ -1,7 +1,12 @@
 class Solution:
     def probabilityOfHeads(self, prob: List[float], target: int) -> float:
         n = len(prob)
-        memo = [[0] * (n + 1) for _ in range(n)]
+        if target == 0:
+            res = 1
+            for i in range(n):
+                res *= 1 - prob[i]
+            return res
+        memo = [[0] * (target + 1) for _ in range(n)]
         memo[0][1] = prob[0]
         memo[0][0] = 1 - prob[0]
         for i in range(1, n):
