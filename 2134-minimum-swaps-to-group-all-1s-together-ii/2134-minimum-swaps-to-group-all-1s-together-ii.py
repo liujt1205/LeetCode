@@ -12,7 +12,6 @@ class Solution:
                 total += 1
         total = total // 2
         res = total
-        print(count)
         
         for i in range(2 * n - total):
             res = min(res, count[i + total] - count[i])
