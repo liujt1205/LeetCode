@@ -6,7 +6,7 @@ class Solution:
         for i in range(n):
             cur = 0
             for j in range(i, n):
-                cur = (cur + nums[j]) % mod
+                cur = cur + nums[j]
                 new_arr.append(cur)
         
         new_arr.sort()
