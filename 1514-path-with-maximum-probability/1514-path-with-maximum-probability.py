@@ -6,17 +6,17 @@ class Solution:
             graph[start][end] = succProb[i]
             graph[end][start] = succProb[i]
             
-        memo = [-2] * n
-        
+        visited = set()        
         pq = [(-1, start_node)]
         while pq:
             prob, node = heapq.heappop(pq)
-            if memo[node] != -2:
+            if node in visited:
                 continue
             else:
                 if node == end_node:
                     return -prob
-                memo[node] = prob
+                visited.add(node)
                 for neighbor in graph[node]:
-                    heapq.heappush(pq, (prob * graph[node][neighbor], neighbor))
+                    if neighbor not in visited:
+                        heapq.heappush(pq, (prob * graph[node][neighbor], neighbor))
         return 0
