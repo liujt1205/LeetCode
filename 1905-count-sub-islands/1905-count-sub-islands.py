@@ -14,9 +14,7 @@ class Solution:
 
         for row in range(m):
             for col in range(n):
-                if grid2[row][col] > 0 and grid1[row][col] > 0:
-                    grid2[row][col] = 2
-                elif grid2[row][col] > 0 and grid1[row][col] == 0:
+                if grid2[row][col] > 0 and grid1[row][col] == 0:
                     sink(row, col, grid2)
         
         res = 0
