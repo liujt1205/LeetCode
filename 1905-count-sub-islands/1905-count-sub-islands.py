@@ -1,6 +1,5 @@
 class Solution:
     def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int:
-        queue = deque()
         m, n = len(grid1), len(grid1[0])
         
         def sink(row, col, grid2):
