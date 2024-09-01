@@ -4,7 +4,5 @@ class Solution:
             return []
         res = [[0] * n for _ in range(m)]
         for index in range(len(original)):
-            row = index // n
-            col = index % n
-            res[row][col] = original[index]
+            res[index // n][index % n] = original[index]
         return res
