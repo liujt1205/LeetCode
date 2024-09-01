@@ -9,14 +9,8 @@ class Solution:
     def addPoly(self, poly1: 'PolyNode', poly2: 'PolyNode') -> 'PolyNode':
         fakeHead = PolyNode(0, 0)
         cur = fakeHead
-        while poly1 or poly2:
-            if not poly1:
-                cur.next = poly2
-                return fakeHead.next
-            elif not poly2:
-                cur.next = poly1
-                return fakeHead.next
-            elif poly1.power == poly2.power:
+        while poly1 and poly2:
+            if poly1.power == poly2.power:
                 newCoeff = poly1.coefficient + poly2.coefficient
                 if newCoeff != 0:
                     cur.next = PolyNode(newCoeff, poly1.power)
@@ -31,5 +25,9 @@ class Solution:
                 cur.next = PolyNode(poly2.coefficient, poly2.power)
                 cur = cur.next
                 poly2 = poly2.next
+        if not poly1:
+            cur.next = poly2
+        elif not poly2:
+            cur.next = poly1
         return fakeHead.next
         
