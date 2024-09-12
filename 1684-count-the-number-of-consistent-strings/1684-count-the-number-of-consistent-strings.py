@@ -3,7 +3,7 @@ class Solution:
         charSet = set(allowed)
         res = 0
         for word in words:
-            if set(word).issubset(set(allowed)):
+            if set(word).issubset(charSet):
                 res += 1
                 
         return res
