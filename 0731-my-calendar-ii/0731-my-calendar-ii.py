@@ -18,7 +18,9 @@ class MyCalendarTwo:
 
                 if self.booking_count[start] == 0:
                     del self.booking_count[start]
-
+                if self.booking_count[end] == 0:
+                    del self.booking_count[end]
+                    
                 return False
 
         return True
