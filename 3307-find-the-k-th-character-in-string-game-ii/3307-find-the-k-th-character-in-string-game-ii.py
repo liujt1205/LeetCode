@@ -1,6 +1,5 @@
 class Solution:
     def kthCharacter(self, k: int, operations: List[int]) -> str:
-        chars = "abcdefghijklmnopqrstuvwxyz"
         length = [2 ** i for i in range(len(operations) + 1)]
         res = 0
         while k > 1:
@@ -12,4 +11,4 @@ class Solution:
                 k -= next_len
                 res += operations[index - 1]
         
-        return chars[res % 26]
+        return chr(ord('a') + res % 26)
