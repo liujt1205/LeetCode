@@ -6,7 +6,7 @@ class Solution:
         queue.append((0, 0, 0))
         while queue:
             row, col, step = queue.popleft()
-            if not 0 <= row < n or not 0 <= col < n or grid[row][col] == 1 or memo[row][col] != n * n + 1:
+            if not 0 <= row < n or not 0 <= col < n or grid[row][col] == 1 or memo[row][col] <= step + 1:
                 continue
             memo[row][col] = step + 1
             queue.append((row - 1, col - 1, step + 1))
