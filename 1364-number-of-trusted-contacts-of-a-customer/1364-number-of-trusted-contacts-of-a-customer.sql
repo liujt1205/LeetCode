@@ -10,6 +10,6 @@ JOIN Customers c
 LEFT JOIN Contacts con
      ON i.user_id = con.user_id
 LEFT JOIN Customers c_trusted
-     ON con.contact_name = c_trusted.customer_name
+     ON con.contact_email = c_trusted.email
 GROUP BY i.invoice_id, c.customer_name, i.price
 ORDER BY i.invoice_id;
