@@ -8,11 +8,6 @@ class Interval:
 
 class Solution:
     def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':
-        left, right = float('inf'), -float('inf')
-        for employee in schedule:
-            left = min(left, employee[0].start)
-            right = max(right, employee[-1].end)
-            
         memo = defaultdict(int)
         for employee in schedule:
             for time in employee:
