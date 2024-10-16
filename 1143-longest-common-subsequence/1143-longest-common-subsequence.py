@@ -10,5 +10,5 @@ class Solution:
                     cur[j + 1] = 1 + pre[j]
                 else:
                     cur[j + 1] = max(cur[j], pre[j + 1])
-            pre, cur = cur, pre
+            pre, cur = cur, [0] * (len(text2) + 1)
         return pre[len(text2)]
