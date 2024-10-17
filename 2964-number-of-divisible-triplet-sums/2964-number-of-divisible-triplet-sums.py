@@ -1,5 +1,7 @@
 class Solution:
     def divisibleTripletCount(self, nums: List[int], d: int) -> int:
+        if len(nums) < 3:
+            return 0
         reminder = [0] * d
         res = 0
         for num in nums:
