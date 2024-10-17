@@ -22,16 +22,9 @@ class Solution:
             bottomLeft = helper(row + length // 2, col, length // 2)
             bottomRight = helper(row + length // 2, col + length // 2, length // 2)
 
-            value, isLeaf = checkChild(topLeft, topRight, bottomLeft, bottomRight)
-            if isLeaf:
-                return Node(value, True, None, None, None, None)
+            if topLeft.isLeaf and topRight.isLeaf and bottomLeft.isLeaf and bottomRight.isLeaf and topLeft.val == topRight.val == bottomLeft.val == bottomRight.val:
+                return Node(topLeft.val, True, None, None, None, None)
             else:
                 return Node(1, False, topLeft, topRight, bottomLeft, bottomRight)
-            
-        def checkChild(topLeft, topRight, bottomLeft, bottomRight):
-            if topLeft.isLeaf and topRight.isLeaf and bottomLeft.isLeaf and bottomRight.isLeaf and topLeft.val == topRight.val == bottomLeft.val == bottomRight.val:
-                return topLeft.val, True
-            else:
-                return 1, False
             
         return helper(0, 0, n)
