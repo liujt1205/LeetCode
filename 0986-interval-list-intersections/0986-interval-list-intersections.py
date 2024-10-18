@@ -14,7 +14,6 @@ class Solution:
         start = -1
         for time in sorted(memo.keys()):
             count += memo[time]
-            print(time, count)
             if count == 2:
                 start = time
             elif start >= 0 and count < 2:
