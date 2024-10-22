@@ -1,25 +1,21 @@
 class Solution:
     def beautifulIndices(self, s: str, a: str, b: str, k: int) -> List[int]:
-        found_a = []
-        found_b = []
-        start = 0
-        while start < len(s):
-            start = s.find(a, start)
-            if start != -1:
-                found_a.append(start)
-                start += 1
-            else:
-                break
+        def kmp(string):
+            res = [0] * len(string)
+            for i in range(1, len(string)):
+                cur = res[i - 1]
+                while cur and string[i] != string[cur]:
+                    cur = res[cur - 1]
+                res[i] = cur + (string[i] == string[cur])
                 
-        start = 0        
-        while start < len(s):
-            start = s.find(b, start)
-            if start != -1:
-                found_b.append(start)
-                start += 1
-            else:
-                break
-                
+            return res
+            
+        indexes_a = kmp(a + "#" + s)
+        indexes_b = kmp(b + "#" + s)
+
+        found_a = [i - len(a) * 2 for i, v in enumerate(indexes_a) if v == len(a)]
+        found_b = [i - len(b) * 2 for i, v in enumerate(indexes_b) if v == len(b)]
+              
         res = []
         start = 0
         for i in range(len(found_a)):
