@@ -13,10 +13,13 @@ class Solution:
             last = None
             for i in range(len(queue)):
                 cur = queue.popleft()
-                if cur:
-                    last = cur
+                if not cur:
+                    continue
+                if cur.left:
                     queue.append(cur.left)
+                if cur.right:
                     queue.append(cur.right)
+                last = cur
             if last:
                 res.append(last.val)
                 
