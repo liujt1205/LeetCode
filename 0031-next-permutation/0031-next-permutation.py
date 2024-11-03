@@ -25,11 +25,9 @@ class Solution:
             if nums[i - 1] < nums[i]:
                 index = findNextBigger(nums, i, nums[i - 1])
                 nums[i - 1], nums[index] = nums[index], nums[i - 1]
-                reverseList(nums, i)
                 break
             i -= 1
-                
-        if i == 0:
-            reverseList(nums, 0)
+
+        reverseList(nums, i)
         
             
