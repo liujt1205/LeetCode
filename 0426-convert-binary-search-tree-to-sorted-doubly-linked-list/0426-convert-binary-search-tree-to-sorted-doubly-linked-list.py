@@ -14,24 +14,22 @@ class Solution:
         
         head = Node(-1)
         queue = deque()        
-        listNode = Node(root.val, head, head)
-        head.right = listNode
-        head.left = listNode
-        queue.append((root, listNode))
-        
+        head.left = head
+        head.right = head
+        queue.append((root, head, head))
         while queue:
-            treenode, dllnode = queue.popleft()
-            if treenode.left:
-                newNode = Node(treenode.left.val, dllnode.left, dllnode)
-                dllnode.left.right = newNode
-                dllnode.left = newNode
-                queue.append((treenode.left, newNode))
-            if treenode.right:
-                newNode = Node(treenode.right.val, dllnode, dllnode.right)
-                dllnode.right.left = newNode
-                dllnode.right = newNode
-                queue.append((treenode.right, newNode))
-                
-        head.right.left = head.left
+            node, p, n = queue.popleft()
+            if node.left:
+                queue.append((node.left, p, node))
+            if node.right:
+                queue.append((node.right, node, n))
+            node.left = p
+            node.right = n
+            p.right = node
+            n.left = node
+            
         head.left.right = head.right
+        head.right.left = head.left
+        
         return head.right
+        
