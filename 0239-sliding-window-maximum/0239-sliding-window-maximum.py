@@ -3,23 +3,21 @@ class Solution:
         res = []
         i = 0
         stack = deque()
-        while i < k - 1:
-            while stack and nums[i] >= nums[stack[-1]]:
-                stack.pop()
-            if not stack or nums[i] < nums[stack[-1]]:
-                stack.append(i)
+        for i in range(k):
             while stack and stack[0] + k < i:
                 stack.popleft()
-            i += 1
-            
-        while i < len(nums):
             while stack and nums[i] >= nums[stack[-1]]:
                 stack.pop()
-            if not stack or nums[i] < nums[stack[-1]]:
-                stack.append(i)
+            stack.append(i)
+
+        res.append(nums[stack[0]])
+            
+        for i in range(k, len(nums)):
             while stack and stack[0] + k <= i:
                 stack.popleft()
-            i += 1
+            while stack and nums[i] >= nums[stack[-1]]:
+                stack.pop()
+            stack.append(i)
             res.append(nums[stack[0]])
             
         return res
