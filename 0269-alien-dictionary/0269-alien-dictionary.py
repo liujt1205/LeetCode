@@ -3,31 +3,11 @@ class Solution:
         child = [set() for _ in range(26)]
         degree = [0] * 26
         seen = set()
-        def transform(index):
-            word = []
-            for char in words[index]:
-                word.append(ord(char) - ord('a'))
-            return word
-            
-        def findDiff(index):
-            i = 0
-            word1 = transform(index)
-            word2 = transform(index + 1)
-            seen.update(word1)
-            seen.update(word2)
-            while i < len(word1) and i < len(word2):
-                if word1[i] != word2[i]:
-                    if word2[i] not in child[word1[i]]:
-                        child[word1[i]].add(word2[i])
-                        degree[word2[i]] += 1
-                    return True
-                i += 1
-            return i == len(word1)
         
         if len(words) == 1:
             return ''.join(list(set(words[0])))
         for i in range(len(words) - 1):
-            if(not findDiff(i)):
+            if(not self.findDiff(words, seen, child, degree, i)):
                 return ""
             
         queue = deque()
@@ -48,3 +28,24 @@ class Solution:
             return ""
         else:
             return ''.join(res)
+        
+    def transform(self, words, index):
+        word = []
+        for char in words[index]:
+            word.append(ord(char) - ord('a'))
+        return word
+            
+    def findDiff(self, words, seen, child, degree, index):
+        i = 0
+        word1 = self.transform(words, index)
+        word2 = self.transform(words, index + 1)
+        seen.update(word1)
+        seen.update(word2)
+        while i < len(word1) and i < len(word2):
+            if word1[i] != word2[i]:
+                if word2[i] not in child[word1[i]]:
+                    child[word1[i]].add(word2[i])
+                    degree[word2[i]] += 1
+                return True
+            i += 1
+        return i == len(word1)
