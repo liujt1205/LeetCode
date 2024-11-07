@@ -5,10 +5,10 @@ class Solution:
         for i in range(len(nums)):
             lo, hi = i + 1, len(nums) - 1
             while lo < hi:
-                sum = nums[i] + nums[lo] + nums[hi]
-                if abs(target - sum) < abs(diff):
-                    diff = target - sum
-                if sum < target:
+                cur_sum = nums[i] + nums[lo] + nums[hi]
+                if abs(target - cur_sum) < abs(diff):
+                    diff = target - cur_sum
+                if cur_sum < target:
                     lo += 1
                 else:
                     hi -= 1
