@@ -1,19 +1,17 @@
 class RandomizedCollection:
 
     def __init__(self):
-        self.indexes = {}
+        self.indexes = defaultdict(set)
         self.items = []
         
 
     def insert(self, val: int) -> bool:
-        if val not in self.indexes:
-            self.indexes[val] = set()
         self.indexes[val].add(len(self.items))
         self.items.append(val)
         return len(self.indexes[val]) == 1
 
     def remove(self, val: int) -> bool:
-        if val not in self.indexes or not self.indexes[val]:
+        if not self.indexes[val]:
             return False
         index = self.indexes[val].pop()
         last_val = self.items[-1]
@@ -22,8 +20,7 @@ class RandomizedCollection:
 
         self.items[index] = last_val
         self.items.pop()
-        if not self.indexes[val]:
-            del self.indexes[val]
+
         return True
 
     def getRandom(self) -> int:
