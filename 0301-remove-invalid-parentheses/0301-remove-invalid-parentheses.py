@@ -19,7 +19,6 @@ class Solution:
         def helper(cur_string, index, left, right, count):
             if index == len(s):
                 if count == 0:
-                    print(count, "".join(cur_string))
                     res.append("".join(cur_string))
                 return
             if s[index] not in "()":
