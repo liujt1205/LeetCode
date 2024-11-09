@@ -1,23 +1,16 @@
 class Solution:
-    def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
-        memo = defaultdict(int)
-        for start, end in firstList:
-            memo[start] += 1
-            memo[end + 0.5] -= 1
-            
-        for start, end in secondList:
-            memo[start] += 1
-            memo[end + 0.5] -= 1
-            
+    def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]: 
         res = []
-        count = 0
-        start = -1
-        for time in sorted(memo.keys()):
-            count += memo[time]
-            if count == 2:
-                start = time
-            elif start >= 0 and count < 2:
-                res.append([start, round(time - 0.5)])
-                start = -1
+        first = 0
+        second = 0
+        while first < len(firstList) and second < len(secondList):
+            lo = max(firstList[first][0], secondList[second][0])
+            hi = min(firstList[first][1], secondList[second][1])
+            if lo <= hi:
+                res.append([lo, hi])
+            if firstList[first][1] < secondList[second][1]:
+                first += 1
+            else:
+                second += 1
         
         return res
