@@ -17,7 +17,7 @@ class Solution:
             if count == 2:
                 start = time
             elif start >= 0 and count < 2:
-                res.append([start, int(time - 0.5)])
+                res.append([start, round(time - 0.5)])
                 start = -1
         
         return res
