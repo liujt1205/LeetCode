@@ -4,20 +4,16 @@ class Solution:
             return [[lower, upper]]
         
         res = []
-        for i, num in enumerate(nums):
-            if num < lower:
-                continue
-            elif num > upper:
-                prev = lower if i == 0 else max(lower, nums[i - 1] + 1)
-                res.append([prev, upper])
-                break
-            elif i == 0 and num > lower:
-                res.append([lower, num - 1])
-            elif i > 0 and num - nums[i - 1] > 1:
-                res.append([max(lower, nums[i - 1] + 1), num - 1])
+        prev = lower - 1
+        for num in nums:
+            lo = prev + 1
+            hi = num - 1
+            if lo <= hi:
+                res.append([lo, hi])
+            prev = num
         
         if nums[-1] < upper:
-            res.append([max(nums[-1] + 1, lower), upper])
+            res.append([nums[-1] + 1, upper])
                 
         return res
         
