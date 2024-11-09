@@ -17,7 +17,6 @@ class Solution:
             cur.next = nextNode
             if nextNode.next:
                 heapq.heappush(pq, (nextNode.next.val, index, nextNode.next))
-            nextNode.next = None
             cur = nextNode
             
         return newHead.next
