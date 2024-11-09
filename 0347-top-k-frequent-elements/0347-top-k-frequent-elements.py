@@ -7,6 +7,6 @@ class Solution:
             if len(heap) > k:
                 heapq.heappop(heap)
         res = []
-        while len(heap) != 0:
+        while heap:
             res.append(heapq.heappop(heap)[1])
         return res
