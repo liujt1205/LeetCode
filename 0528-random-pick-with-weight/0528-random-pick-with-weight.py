@@ -1,23 +1,10 @@
 class Solution:
 
     def __init__(self, w: List[int]):
-        self.prefix_sum = []
-        cur_sum = 0
-        for weight in w:
-            cur_sum += weight
-            self.prefix_sum.append(cur_sum)
-        self.total = cur_sum
+        self.weights = w
 
     def pickIndex(self) -> int:
-        target = self.total * random.random()
-        low, high = 0, len(self.prefix_sum)
-        while low < high:
-            mid = low + (high - low) // 2
-            if target > self.prefix_sum[mid]:
-                low = mid + 1
-            else:
-                high = mid
-        return low
+        return random.choices(range(len(self.weights)), weights = self.weights, k = 1)[0]
 
 
 # Your Solution object will be instantiated and called as such:
