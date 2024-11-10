@@ -3,8 +3,9 @@ class Solution:
         res = ""
         while num:
             if num >= 1000:
-                res += "M"
-                num -= 1000
+                count = num // 1000
+                num = num % 1000
+                res += "M" * count
             elif num >= 900:
                 res += "CM"
                 num -= 900
@@ -15,8 +16,9 @@ class Solution:
                 res += "CD"
                 num -= 400
             elif num >= 100:
-                res += "C"
-                num -= 100
+                count = num // 100
+                num = num % 100
+                res += "C" * count
             elif num >= 90:
                 res += "XC"
                 num -= 90
@@ -27,8 +29,9 @@ class Solution:
                 res += "XL"
                 num -= 40
             elif num >= 10:
-                res += "X"
-                num -= 10
+                count = num // 10
+                num = num % 10
+                res += "X" * count
             elif num >= 9:
                 res += "IX"
                 num -= 9
@@ -39,7 +42,6 @@ class Solution:
                 res += "IV"
                 num -=4
             else:
-                res += "I"
-                num -= 1
-                
+                res += "I" * num
+                break
         return res
