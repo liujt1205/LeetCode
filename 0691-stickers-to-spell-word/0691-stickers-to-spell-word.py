@@ -17,7 +17,7 @@ class Solution:
                 now = state
                 for letter in sticker:
                     for i, c in enumerate(target):
-                        if (now >> i) & 1: continue
+                        if (now & (1 << i)): continue
                         if c == letter:
                             now |= 1 << i
                             break
