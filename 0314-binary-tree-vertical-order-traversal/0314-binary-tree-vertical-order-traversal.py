@@ -11,15 +11,18 @@ class Solution:
         memo = defaultdict(list)
         queue = deque()
         queue.append((root, 0))
+        left, right = 0, 0
         while queue:
             cur = queue.popleft()
             memo[cur[1]].append(cur[0].val)
+            left = min(left, cur[1])
+            right = max(right, cur[1])
             if cur[0].left:
                 queue.append((cur[0].left, cur[1]-1))
             if cur[0].right:
                 queue.append((cur[0].right, cur[1]+1))
         res = []
-        cols = sorted(memo.keys())
-        for i in cols:
+        
+        for i in range(left, right + 1):
             res.append(memo[i])
         return res
