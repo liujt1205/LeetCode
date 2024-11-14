@@ -1,16 +1,17 @@
 class Solution:
     def minimizedMaximum(self, n: int, quantities: List[int]) -> int:
-        biggest = max(quantities)
-        left, right = 1, biggest
-        while left <= right:
-            mid = left + (right - left) // 2
-            count = 0
-            for num in quantities:
-                count += num // mid + 1 - (num % mid == 0)
-
-            if count <= n:
-                right = mid - 1
-            else:
-                left = mid + 1
-                
-        return left
+        m = len(quantities)
+        
+        queue = []
+        for q in quantities:
+            queue.append((-q, q, 1))
+            
+        heapq.heapify(queue)
+            
+        for _ in range(n - m):
+            _, total, count = heapq.heappop(queue)
+            newMax = total / (count + 1)
+            heapq.heappush(queue, (-newMax, total, count + 1))
+            
+        _, total, count = heapq.heappop(queue)
+        return math.ceil(total / count)
