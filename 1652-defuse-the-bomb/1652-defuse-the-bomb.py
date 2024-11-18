@@ -1,18 +1,22 @@
 class Solution:
     def decrypt(self, code: List[int], k: int) -> List[int]:
-        def replace(code, i, k):
-            if k == 0:
-                return 0
-            step = 1 if k > 0 else -1
-            curSum = 0
-            for _ in range(abs(k)):
-                i = (i + step + len(code)) % len(code)
-                curSum += code[i]
-                
-            return curSum
+        res = [0] * len(code)
+        if k == 0:
+            return res
         
-        res = []
-        for i, num in enumerate(code):
-            res.append(replace(code, i, k))
+        start, end, curSum = 1, k, 0
+        if k < 0:
+            start = len(code) - abs(k)
+            end = len(code) - 1
+            
+        for i in range(start, end + 1):
+            curSum += code[i]
+            
+        for i in range(len(code)):
+            res[i] = curSum
+            curSum -= code[start % len(code)]
+            curSum += code[(end + 1) % len(code)]
+            start += 1
+            end += 1
             
         return res
