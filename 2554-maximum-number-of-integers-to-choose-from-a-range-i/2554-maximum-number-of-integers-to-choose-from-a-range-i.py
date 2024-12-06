@@ -7,5 +7,7 @@ class Solution:
                 maxSum -= i
                 if maxSum >= 0:
                     res += 1
+                else:
+                    break
                     
         return res
