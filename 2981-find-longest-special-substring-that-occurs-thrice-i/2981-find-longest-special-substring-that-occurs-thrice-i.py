@@ -11,15 +11,15 @@ class Solution:
             memo[s[i]].append(count)
             i += 1
             
-        maxi = -1
-        for ch, lis in memo.items():
-            lis.sort(reverse=True)
-            if lis[0] >= 3:
-                maxi = max(maxi, lis[0]-2)
-            if len(lis) >= 2:
-                if lis[0] >= 2:
-                    maxi = max(maxi, min(lis[0]-1, lis[1]))
-                if len(lis) >= 3:
-                    maxi = max(maxi, lis[2])
+        res = -1
+        for value in memo.values():
+            value.sort(reverse=True)
+            if value[0] >= 3:
+                res = max(res, value[0]-2)
+            if len(value) >= 2:
+                if value[0] >= 2:
+                    res = max(res, min(value[0]-1, value[1]))
+                if len(value) >= 3:
+                    res = max(res, value[2])
                 
-        return maxi 
+        return res 
