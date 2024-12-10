@@ -1,30 +1,27 @@
 class Solution:
     def maximumLength(self, s: str) -> int:
-        ans = -1
+        hash = defaultdict(list)
+        
         n = len(s)
-        counter = 1
-        prev = '#'
-        # Initialize a 2D list for 26 letters and n + 2 lengths
-        p = [[0] * (n + 2) for _ in range(26)]
-
-        # First pass: build the `p` table
-        for i in range(n):
-            if i == 0 or s[i] != prev:
-                counter = 1
-            else:
-                counter += 1
-
-            char_index = ord(s[i]) - ord('a')
-            p[char_index][1] += 1
-            p[char_index][counter + 1] -= 1
-            prev = s[i]
-
-        # Second pass: calculate the maximum length
-        for c in range(26):
-            sum_runs = 0
-            for length in range(1, n + 1):
-                sum_runs += p[c][length]
-                if sum_runs >= 3:
-                    ans = max(ans, length)
-
-        return ans
+        i = 0
+        while i < n:
+            temp = 1
+            ch = s[i]
+            while i < n-1 and s[i] == s[i+1]:
+                temp += 1
+                i += 1
+            hash[ch].append(temp)
+            i += 1
+            
+        maxi = -1
+        for ch, lis in hash.items():
+            lis.sort(reverse=True)
+            if lis[0] >= 3:
+                maxi = max(maxi, lis[0]-2)
+            if len(lis) >= 2:
+                if lis[0] >= 2:
+                    maxi = max(maxi, min(lis[0]-1, lis[1]))
+                if len(lis) >= 3:
+                    maxi = max(maxi, lis[2])
+                
+        return maxi 
