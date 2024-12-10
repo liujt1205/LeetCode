@@ -1,20 +1,18 @@
 class Solution:
     def maximumLength(self, s: str) -> int:
-        hash = defaultdict(list)
-        
+        memo = defaultdict(list)
         n = len(s)
         i = 0
         while i < n:
-            temp = 1
-            ch = s[i]
+            count = 1
             while i < n-1 and s[i] == s[i+1]:
-                temp += 1
+                count += 1
                 i += 1
-            hash[ch].append(temp)
+            memo[s[i]].append(count)
             i += 1
             
         maxi = -1
-        for ch, lis in hash.items():
+        for ch, lis in memo.items():
             lis.sort(reverse=True)
             if lis[0] >= 3:
                 maxi = max(maxi, lis[0]-2)
