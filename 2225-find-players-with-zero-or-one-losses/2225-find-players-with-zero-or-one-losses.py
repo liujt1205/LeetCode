@@ -4,16 +4,15 @@ class Solution:
         for i in range(len(matches)):
             winner, loser = matches[i]
             if winner not in memo:
-                memo[winner] = [0, 0]
+                memo[winner] = 0
             if loser not in memo:
-                memo[loser] = [0, 0]
-            memo[winner][0] += 1
-            memo[loser][1] += 1
+                memo[loser] = 0
+            memo[loser] += 1
         res = [[], []]
         for player in memo.keys():
-            if memo[player][1] == 0:
+            if memo[player] == 0:
                 res[0].append(player)
-            elif memo[player][1] == 1:
+            elif memo[player] == 1:
                 res[1].append(player)
         res[1].sort()
         res[0].sort()
