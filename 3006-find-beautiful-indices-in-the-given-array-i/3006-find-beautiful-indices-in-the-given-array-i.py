@@ -1,18 +1,23 @@
 class Solution:
     def beautifulIndices(self, s: str, a: str, b: str, k: int) -> List[int]:
-        def kmp(string):
-            res = [0] * len(string)
-            for i in range(1, len(string)):
-                cur = res[i - 1]
-                while cur and string[cur] != string[i]:
-                    cur = res[cur - 1]
-                res[i] = cur + (string[cur] == string[i])
+        def kmp(string, sub):
+            combined = sub + '#' + string
+            target = [0] * len(combined)
+            for i in range(1, len(combined)):
+                cur = target[i - 1]
+                while cur and combined[cur] != combined[i]:
+                    cur = target[cur - 1]
+                target[i] = cur + (combined[cur] == combined[i])
+                
+            res = []
+            for i in range(len(target)):
+                if target[i] == len(sub):
+                    res.append(i - len(sub) * 2)
+                    
             return res
         
-        foundA = kmp(a + '#' + s)
-        foundB = kmp(b + '#' + s)
-        indexA = [i - 2 * len(a) for i in range(len(foundA)) if foundA[i] == len(a)]
-        indexB = [i - 2 * len(b) for i in range(len(foundB)) if foundB[i] == len(b)]
+        indexA = kmp(s, a)
+        indexB = kmp(s, b)
         
         res = []
         index = 0
