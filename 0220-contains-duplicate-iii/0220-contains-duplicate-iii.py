@@ -2,19 +2,19 @@ from sortedcontainers import SortedList
 
 class Solution:
     def containsNearbyAlmostDuplicate(self, nums: List[int], indexDiff: int, valueDiff: int) -> bool:
-        set_ = SortedList()
+        buckets = {}
+        size = valueDiff + 1
         for i in range(len(nums)):
-            # Find the successor of current element
-            idx = set_.bisect_left(nums[i])
-            if idx != len(set_) and set_[idx] <= nums[i] + valueDiff:
+            bucket = nums[i] // size
+            if bucket in buckets:
                 return True
-
-            # Find the predecessor of current element
-            if idx > 0 and nums[i] <= set_[idx - 1] + valueDiff:
+            if bucket - 1 in buckets and nums[i] - buckets[bucket - 1] <= valueDiff:
                 return True
-
-            set_.add(nums[i])
-            if len(set_) > indexDiff:
-                set_.remove(nums[i - indexDiff])
-
+            if bucket + 1 in buckets and buckets[bucket + 1] - nums[i] <= valueDiff:
+                return True
+            
+            buckets[bucket] = nums[i]
+            if i >= indexDiff:
+                del buckets[nums[i - indexDiff] // size]
+                
         return False
