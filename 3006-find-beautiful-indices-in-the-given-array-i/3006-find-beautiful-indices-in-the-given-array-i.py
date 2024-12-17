@@ -4,28 +4,23 @@ class Solution:
             res = [0] * len(string)
             for i in range(1, len(string)):
                 cur = res[i - 1]
-                while cur and string[i] != string[cur]:
+                while cur and string[cur] != string[i]:
                     cur = res[cur - 1]
-                res[i] = cur + (string[i] == string[cur])
-                
+                res[i] = cur + (string[cur] == string[i])
             return res
-            
-        indexes_a = kmp(a + "#" + s)
-        indexes_b = kmp(b + "#" + s)
-
-        found_a = [i - len(a) * 2 for i, v in enumerate(indexes_a) if v == len(a)]
-        found_b = [i - len(b) * 2 for i, v in enumerate(indexes_b) if v == len(b)]
-              
+        
+        foundA = kmp(a + '#' + s)
+        foundB = kmp(b + '#' + s)
+        indexA = [i - 2 * len(a) for i in range(len(foundA)) if foundA[i] == len(a)]
+        indexB = [i - 2 * len(b) for i in range(len(foundB)) if foundB[i] == len(b)]
+        
         res = []
-        start = 0
-        for i in range(len(found_a)):
-            while start < len(found_b) and found_b[start] <= found_a[i] and abs(found_a[i] - found_b[start]) > k:
-                start += 1
-            if start >= len(found_b):
-                break
-            if found_b[start] > found_a[i] and abs(found_a[i] - found_b[start]) > k:
-                continue
-            else:
-                res.append(found_a[i])
-                    
+        index = 0
+        for i in range(len(indexA)):
+            while index < len(indexB) and indexB[index] + k < indexA[i]:
+                index += 1
+            
+            if index < len(indexB) and indexB[index] <= k + indexA[i]:
+                res.append(indexA[i])
+                
         return res
