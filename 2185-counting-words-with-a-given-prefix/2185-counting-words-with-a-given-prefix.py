@@ -3,7 +3,7 @@ class Solution:
         res = 0
         n = len(pref)
         for word in words:
-            if len(word) >= n and word[:n] == pref:
+            if word.startswith(pref):
                 res += 1
 
         return res
