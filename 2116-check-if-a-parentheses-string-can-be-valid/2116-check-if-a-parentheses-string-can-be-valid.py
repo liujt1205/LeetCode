@@ -1,39 +1,40 @@
 class Solution:
     def canBeValid(self, s: str, locked: str) -> bool:
-        length = len(s)
-        if length % 2 == 1:
+        n = len(s)
+        if n % 2 == 1:
             return False
-        open_brackets = 0
-        unlocked_count = 0
-        for i in range(length):
+
+        free = 0
+        left = 0
+        for i in range(n):
             if locked[i] == "0":
-                unlocked_count += 1
-            elif s[i] == "(":
-                open_brackets += 1
-            elif s[i] == ")":
-                if open_brackets > 0:
-                    open_brackets -= 1
-                elif unlocked_count > 0:
-                    unlocked_count -= 1
+                free += 1
+            elif s[i] == '(':
+                left += 1
+            elif s[i] == ')':
+                if left > 0:
+                    left -= 1
+                elif free > 0:
+                    free -= 1
                 else:
                     return False
 
-        balance_count = 0
-        for i in range(length - 1, -1, -1):
+        pairs = 0
+        for i in range(n - 1, -1, -1):
             if locked[i] == "0":
-                balance_count -= 1
-                unlocked_count -= 1
-            elif s[i] == "(":
-                balance_count += 1
-                open_brackets -= 1
-            elif s[i] == ")":
-                balance_count -= 1
-            if balance_count > 0:
+                pairs -= 1
+                free -= 1
+            elif s[i] == '(':
+                pairs += 1
+                left -= 1
+            elif s[i] == ')':
+                pairs -= 1
+            if pairs > 0:
                 return False
-            if unlocked_count == 0 and open_brackets == 0:
+            if left == 0 and free == 0:
                 break
-
-        if open_brackets > 0:
+        
+        if left > 0:
             return False
 
         return True
