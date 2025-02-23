@@ -6,20 +6,22 @@
 #         self.right = right
 class Solution:
     def constructFromPrePost(self, preorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        def helper(pre_start, pre_end, post_start, preorder, postorder):
+        def helper(pre_start, pre_end, post_start, preorder, index_map):
             if pre_start > pre_end:
                 return None
             root = TreeNode(preorder[pre_start])
             if pre_start == pre_end:
                 return root
             leftRoot = preorder[pre_start + 1]
-            leftCount = 1
-            while postorder[post_start + leftCount - 1] != leftRoot:
-                leftCount += 1
+            leftCount = index_map[leftRoot] - post_start + 1
 
-            root.left = helper(pre_start + 1, pre_start + leftCount, post_start, preorder, postorder)
-            root.right = helper(pre_start + leftCount + 1, pre_end, post_start + leftCount, preorder, postorder)
+            root.left = helper(pre_start + 1, pre_start + leftCount, post_start, preorder, index_map)
+            root.right = helper(pre_start + leftCount + 1, pre_end, post_start + leftCount, preorder, index_map)
             
             return root
 
-        return helper(0, len(preorder) - 1, 0, preorder, postorder)
+        index_map = [0] * (len(preorder) + 1)
+        for i in range(len(preorder)):
+            index_map[postorder[i]] = i
+
+        return helper(0, len(preorder) - 1, 0, preorder, index_map)
