@@ -10,27 +10,20 @@ class Solution:
             return 0
 
         res = [0]
-        def helper(node):
+        def helper(node, preSum):
             if not node:
-                return {}
-            
-            left = helper(node.left)
-            right = helper(node.right)
-            count = defaultdict(int)
-            for pos in left:
-                count[pos + node.val] += left[pos]
-                if pos + node.val == targetSum:
-                    res[0] += left[pos]
-            for pos in right:
-                count[pos + node.val] += right[pos]
-                if pos + node.val == targetSum:
-                    res[0] += right[pos]
-            count[node.val] += 1
-            if node.val == targetSum:
+                return
+            curSum = preSum + node.val
+            if curSum == targetSum:
                 res[0] += 1
+            
+            res[0] += count[curSum - targetSum]
+            count[curSum] += 1
+            helper(node.left, curSum)
+            helper(node.right, curSum)
+            count[curSum] -= 1
 
-            return count
-
-        helper(root)
+        count = defaultdict(int)
+        helper(root, 0)
         return res[0]
             
