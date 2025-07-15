@@ -9,14 +9,14 @@ class Solution:
         inorderNodes = []
 
         def inorder(node):
-            if node is None:
+            if not node:
                 return
             inorder(node.left)
             inorderNodes.append(node.val)
             inorder(node.right)
         
         inorder(root)
-        minDifference = 1e9
+        minDifference = float('inf')
         for i in range(1, len(inorderNodes)):
             minDifference = min(minDifference, inorderNodes[i] - inorderNodes[i-1])
 
