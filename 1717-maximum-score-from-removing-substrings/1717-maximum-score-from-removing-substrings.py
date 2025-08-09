@@ -1,32 +1,37 @@
 class Solution:
     def maximumGain(self, s: str, x: int, y: int) -> int:
-        res = 0
-        if x >= y:
-            first = "a"
-            second = "b"
-            larger = x
-            smaller = y
+        stack = deque()
+        if x > y:
+            first = 'a'
+            second = 'b'
+            large = x
+            small = y
         else:
-            first = "b"
-            second = "a"
-            larger = y
-            smaller = x
-        
-        count = [0] * 2
+            first = 'b'
+            second = 'a'
+            large = y
+            small = x
+
+        res = 0
         for char in s:
-            if char == first:
-                count[0] += 1
-            elif char == second:
-                if count[0] > 0:
-                    count[0] -= 1
-                    res += larger
+            if char in [first, second]:
+                if stack and char == second and stack[-1] == first:
+                    stack.pop()
+                    res += large
                 else:
-                    count[1] += 1
+                    stack.append(char)
             else:
-                if count[0] * count[1] > 0:
-                    res += smaller * min(count[0], count[1])
-                count = [0] * 2
-        
-        res += smaller * min(count[0], count[1])
+                while stack and stack[0] == second and stack[-1] == first:
+                    stack.popleft()
+                    stack.pop()
+                    res += small
+                stack = deque()
+
+        while stack and stack[0] == second and stack[-1] == first:
+            stack.popleft()
+            stack.pop()
+            res += small
+
         return res
-                
+
+        
